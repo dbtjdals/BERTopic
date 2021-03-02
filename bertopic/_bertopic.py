@@ -1219,9 +1219,12 @@ class BERTopic:
         #significance score calculation
         if self.significance == True:
             
+            #turn the sparse matrix into a numpy array
             c_tf_idf_array = c_tf_idf.toarray()
 
             word_list_length = np.array([len(i.split()) for i in words]).reshape(len(words),1)
+
+            #perform matrix multiplication; transform the result back to a sparse matrix
             c_tf_idf = sparse.csr_matrix((c_tf_idf_array.T * word_list_length).T)
 
         return c_tf_idf, words
